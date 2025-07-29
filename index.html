@@ -190,7 +190,14 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, setDoc, getDoc, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const firebaseConfig = {
+  apiKey: "AIzaSyDXgGiKPbsVU1dK088u2tvkBW4PujRcpmA",
+  authDomain: "nksc-support-backend.firebaseapp.com",
+  projectId: "nksc-support-backend",
+  storageBucket: "nksc-support-backend.firebasestorage.app",
+  messagingSenderId: "1091576309432",
+  appId: "1:1091576309432:web:e0357eefad68c72e02f64d"
+};
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'nksc-support-default';
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
