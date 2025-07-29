@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NKSC Support Center - New Request</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .tab-active { border-bottom-color: #ef4444; color: #ef4444; font-weight: 600; }
+        .modal-backdrop { background-color: rgba(0, 0, 0, 0.5); }
+        .table-container::-webkit-scrollbar { height: 8px; }
+        .table-container::-webkit-scrollbar-track { background: #fee2e2; border-radius: 10px; }
+        .table-container::-webkit-scrollbar-thumb { background: #dc2626; border-radius: 10px; }
+        .table-container::-webkit-scrollbar-thumb:hover { background: #b91c1c; }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-red-700">
+                <i class="fas fa-headset mr-3"></i>NKSC Support Center
+            </h1>
+            <p class="text-gray-500 mt-2">Your Reliable Partner in Service</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="mb-8 border-b border-gray-200">
+            <nav class="flex -mb-px space-x-6" aria-label="Tabs">
+                <button id="tab-request" class="py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-300 tab-active">
+                    <i class="fas fa-file-alt mr-2"></i>New Request
+                </button>
+                <button id="tab-admin" class="py-4 px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-red-600 hover:border-red-300">
+                    <i class="fas fa-user-shield mr-2"></i>Admin Panel
+                </button>
+            </nav>
+        </div>
+
+        <!-- App Views -->
+        <div>
+            <!-- Request Form View -->
+            <div id="request-view">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg max-w-4xl mx-auto">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-700">Submit a Support Request</h2>
+                    <form id="request-form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="fullName" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                            <input type="text" id="company" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                         <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <input type="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                            <input type="text" id="location" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label for="dateRequested" class="block text-sm font-medium text-gray-700 mb-1">Date Requested</label>
+                            <input type="date" id="dateRequested" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label for="priority" class="block text-sm font-medium text-gray-700 mb-1">Priority</label>
+                            <select id="priority" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500 bg-white">
+                                <option value="Low">Low</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+                            </select>
+                        </div>
+                         <div class="md:col-span-2">
+                            <label for="concerns" class="block text-sm font-medium text-gray-700 mb-1">Concerns</label>
+                            <textarea id="concerns" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"></textarea>
+                        </div>
+                        <div class="md:col-span-2 text-right mt-4">
+                            <button type="submit" class="bg-red-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-transform transform hover:scale-105">
+                                <i class="fas fa-paper-plane mr-2"></i>Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Panel View -->
+            <div id="admin-view" class="hidden">
+                 <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                        <h2 class="text-2xl font-bold text-gray-700">Support Tickets</h2>
+                        <div class="flex items-center space-x-2">
+                             <button id="manage-cc-btn" class="bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-600 text-sm">
+                                <i class="fas fa-at mr-2"></i>Manage CC Emails
+                            </button>
+                            <button id="logout-btn" class="bg-red-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-red-600 text-sm">
+                                <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-container overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ref ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client Details</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Concern</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Priority</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tickets-table-body" class="bg-white divide-y divide-gray-200">
+                                <tr><td colspan="6" class="text-center p-8 text-gray-500">Please log in to view tickets.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm">
+            <form id="admin-login-form" class="p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Admin Login</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                        <input type="text" id="username" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                </div>
+                <p id="login-error" class="text-red-500 text-sm mt-2 text-center hidden">Invalid credentials.</p>
+                <div class="mt-8">
+                    <button type="submit" class="w-full bg-red-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-red-700">Login</button>
+                </div>
+            </form>
+             <div class="bg-gray-50 px-8 py-4 border-t">
+                <button type="button" id="cancel-login-btn" class="w-full text-center text-sm text-gray-600 hover:text-gray-800">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="cc-emails-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md">
+            <div class="p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Manage CC Email Recipients</h3>
+                <form id="add-cc-form" class="flex gap-2 mb-4">
+                    <input type="email" id="new-cc-email" placeholder="Add new email" required class="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    <button type="submit" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-600">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </form>
+                <div id="cc-list-container" class="space-y-2 max-h-60 overflow-y-auto">
+                    <!-- CC emails will be listed here -->
+                </div>
+            </div>
+            <div class="bg-gray-50 px-8 py-4 border-t text-right">
+                <button type="button" id="close-cc-modal-btn" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 font-semibold">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message Toast -->
+    <div id="success-toast" class="fixed top-5 right-5 bg-green-500 text-white py-3 px-6 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300"></div>
+
+    <!-- Firebase and App Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, setDoc, getDoc, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'nksc-support-default';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+        let isAdminLoggedIn = false;
+        let unsubscribeFromTickets = null;
+        let ccEmails = [];
+
+        const adminLoginModal = document.getElementById('admin-login-modal');
+        const ccEmailsModal = document.getElementById('cc-emails-modal');
+        const successToast = document.getElementById('success-toast');
+
+        async function initializeFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                onAuthStateChanged(auth, user => {
+                    userId = user ? user.uid : null;
+                });
+                if (initialAuthToken) await signInWithCustomToken(auth, initialAuthToken);
+                else await signInAnonymously(auth);
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+            }
+        }
+
+        function showView(viewId) {
+            document.getElementById('request-view').classList.toggle('hidden', viewId !== 'request-view');
+            document.getElementById('admin-view').classList.toggle('hidden', viewId !== 'admin-view');
+            document.getElementById('tab-request').classList.toggle('tab-active', viewId === 'request-view');
+            document.getElementById('tab-admin').classList.toggle('tab-active', viewId === 'admin-view');
+        }
+        
+        function showToast(message, isSuccess = true) {
+            successToast.innerHTML = `<p><i class="fas ${isSuccess ? 'fa-check-circle' : 'fa-times-circle'} mr-2"></i>${message}</p>`;
+            successToast.className = `fixed top-5 right-5 py-3 px-6 rounded-lg shadow-lg transform transition-transform duration-300 ${isSuccess ? 'bg-green-500' : 'bg-red-500'} text-white`;
+            successToast.classList.remove('translate-x-full');
+            setTimeout(() => successToast.classList.add('translate-x-full'), 5000);
+        }
+
+        document.getElementById('request-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                company: document.getElementById('company').value,
+                email: document.getElementById('email').value,
+                location: document.getElementById('location').value,
+                dateRequested: document.getElementById('dateRequested').value,
+                priority: document.getElementById('priority').value,
+                concerns: document.getElementById('concerns').value,
+                status: 'New'
+            };
+            const referenceId = `NKSC-${Date.now().toString().slice(-7)}`;
+            
+            try {
+                await addDoc(collection(db, `/artifacts/${appId}/public/data/tickets`), {
+                    ...formData,
+                    referenceId,
+                    createdAt: serverTimestamp()
+                });
+                
+                const confirmationMessage = `Your Request has been received, with the reference no. <strong>${referenceId}</strong>. This request will be forwarded to the Support Team of NKSC.`;
+                showToast(confirmationMessage);
+                
+                // --- SIMULATED EMAIL ---
+                console.log("--- EMAIL SIMULATION ---");
+                console.log(`To: ${formData.email}`);
+                if (ccEmails.length > 0) {
+                    console.log(`CC: ${ccEmails.join(', ')}`);
+                }
+                console.log("Subject: Support Request Received - Ref: " + referenceId);
+                console.log("Body: " + confirmationMessage.replace(/<[^>]*>/g, '')); // remove html tags for console
+                console.log("------------------------");
+                
+                e.target.reset();
+            } catch (err) {
+                console.error("Error submitting request:", err);
+                showToast("Failed to submit request.", false);
+            }
+        });
+
+        document.getElementById('admin-login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (document.getElementById('username').value === 'admin' && document.getElementById('password').value === 'admin') {
+                isAdminLoggedIn = true;
+                adminLoginModal.classList.add('hidden');
+                document.getElementById('login-error').classList.add('hidden');
+                e.target.reset();
+                showView('admin-view');
+                listenForTickets();
+                loadCcEmails();
+            } else {
+                document.getElementById('login-error').classList.remove('hidden');
+            }
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            isAdminLoggedIn = false;
+            if (unsubscribeFromTickets) unsubscribeFromTickets();
+            unsubscribeFromTickets = null;
+            document.getElementById('tickets-table-body').innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">Please log in to view tickets.</td></tr>`;
+            showView('request-view');
+            showToast("You have been logged out.");
+        });
+
+        function listenForTickets() {
+            if (unsubscribeFromTickets) return;
+            const q = query(collection(db, `/artifacts/${appId}/public/data/tickets`));
+            unsubscribeFromTickets = onSnapshot(q, (snapshot) => {
+                const tableBody = document.getElementById('tickets-table-body');
+                if (snapshot.empty) {
+                    tableBody.innerHTML = `<tr><td colspan="6" class="text-center p-8 text-gray-500">No tickets found.</td></tr>`;
+                    return;
+                }
+                const tickets = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                tickets.sort((a, b) => (b.createdAt?.toMillis() || 0) - (a.createdAt?.toMillis() || 0));
+                
+                tableBody.innerHTML = tickets.map(ticket => `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-6 py-4"><div class="text-sm font-semibold text-red-600">${ticket.referenceId}</div></td>
+                        <td class="px-6 py-4"><div class="text-sm font-medium text-gray-900">${ticket.fullName}</div><div class="text-sm text-gray-500">${ticket.company}</div></td>
+                        <td class="px-6 py-4 text-sm text-gray-600 max-w-xs truncate">${ticket.concerns}</td>
+                        <td class="px-6 py-4"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${ticket.priority === 'Urgent' ? 'bg-red-100 text-red-800' : ticket.priority === 'High' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'}">${ticket.priority}</span></td>
+                        <td class="px-6 py-4 text-sm text-gray-500">${new Date(ticket.dateRequested).toLocaleDateString()}</td>
+                        <td class="px-6 py-4"><select data-doc-id="${ticket.id}" class="status-select w-full p-2 border-gray-300 rounded-md bg-white focus:ring-red-500 focus:border-red-500"><option value="New" ${ticket.status === 'New' ? 'selected' : ''}>New</option><option value="In Progress" ${ticket.status === 'In Progress' ? 'selected' : ''}>In Progress</option><option value="Resolved" ${ticket.status === 'Resolved' ? 'selected' : ''}>Resolved</option></select></td>
+                    </tr>
+                `).join('');
+            });
+        }
+        
+        document.addEventListener('change', async (e) => {
+            if (e.target.classList.contains('status-select')) {
+                const docId = e.target.dataset.docId;
+                const newStatus = e.target.value;
+                try {
+                    await updateDoc(doc(db, `/artifacts/${appId}/public/data/tickets`, docId), { status: newStatus });
+                    showToast(`Ticket status updated to ${newStatus}`);
+                } catch (error) {
+                    showToast('Failed to update status.', false);
+                }
+            }
+        });
+
+        // --- CC Email Management ---
+        const ccListContainer = document.getElementById('cc-list-container');
+        
+        async function loadCcEmails() {
+            const docRef = doc(db, `/artifacts/${appId}/public/data/config/ccEmails`);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                ccEmails = docSnap.data().emails || [];
+            } else {
+                ccEmails = [];
+            }
+            renderCcEmails();
+        }
+
+        function renderCcEmails() {
+            ccListContainer.innerHTML = ccEmails.map(email => `
+                <div class="flex justify-between items-center bg-gray-100 p-2 rounded-md">
+                    <span class="text-sm">${email}</span>
+                    <button data-email="${email}" class="remove-cc-btn text-red-500 hover:text-red-700">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        async function saveCcEmails() {
+            const docRef = doc(db, `/artifacts/${appId}/public/data/config/ccEmails`);
+            await setDoc(docRef, { emails: ccEmails });
+            renderCcEmails();
+        }
+
+        document.getElementById('add-cc-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newEmailInput = document.getElementById('new-cc-email');
+            const newEmail = newEmailInput.value.trim();
+            if (newEmail && !ccEmails.includes(newEmail)) {
+                ccEmails.push(newEmail);
+                await saveCcEmails();
+                newEmailInput.value = '';
+                showToast("CC email added.");
+            }
+        });
+
+        ccListContainer.addEventListener('click', async (e) => {
+            if (e.target.classList.contains('remove-cc-btn')) {
+                const emailToRemove = e.target.dataset.email;
+                ccEmails = ccEmails.filter(email => email !== emailToRemove);
+                await saveCcEmails();
+                showToast("CC email removed.");
+            }
+        });
+
+        // --- Event Listeners ---
+        document.getElementById('tab-request').addEventListener('click', () => showView('request-view'));
+        document.getElementById('tab-admin').addEventListener('click', () => {
+            if (isAdminLoggedIn) showView('admin-view');
+            else adminLoginModal.classList.remove('hidden');
+        });
+        document.getElementById('cancel-login-btn').addEventListener('click', () => adminLoginModal.classList.add('hidden'));
+        document.getElementById('manage-cc-btn').addEventListener('click', () => ccEmailsModal.classList.remove('hidden'));
+        document.getElementById('close-cc-modal-btn').addEventListener('click', () => ccEmailsModal.classList.add('hidden'));
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('dateRequested').value = new Date().toISOString().split('T')[0];
+            initializeFirebase();
+        });
+    </script>
+</body>
+</html>
